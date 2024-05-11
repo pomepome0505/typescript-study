@@ -15,3 +15,26 @@ console.log(ary2)
 
 const ary3: readonly number[] = [1, 2, 3]
 console.log(ary3)
+
+type FooObject = {
+  name: string,
+  age: number
+}
+
+const obj: FooObject = {
+  name: '田中太郎',
+  age: 18
+}
+
+console.log(obj)
+
+type BarObject = {
+  [key: string]: number
+}
+
+const obj2: BarObject = {
+  apple: 1,
+  peach: 2
+}
+
+console.log(obj2)
