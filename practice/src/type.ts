@@ -21,3 +21,23 @@ console.log(obj)
 // これは部分型であるため
 const obj2: Foo = obj;
 console.log(obj2)
+
+type Animal = {
+  species: string 
+}
+
+type Human = {
+  name: string
+}
+
+type User = Animal | Human
+
+const obj3: User = {
+  name: '田中 太郎'
+}
+
+console.log(obj3)
+
+const foobar = (age: number | undefined) => console.log(`年齢：${age}`)
+foobar(18)
+foobar(undefined)
