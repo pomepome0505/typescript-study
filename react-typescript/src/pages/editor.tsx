@@ -48,12 +48,14 @@ const HeaderArea = styled.div`
   left: 0;
 `
 
-const StorageKey = 'pages/editor:text'
-export const Editor: React.FC = () => {
-  const [text, setText] = useStateWithLocalStorage('', StorageKey)
-  const saveMemo = (): void => {
-    putMemo('TITLE', text)
-  }
+interface Props {
+  text: string
+  setText: (text: string) => void
+}
+
+
+export const Editor: React.FC<Props> = (props) => {
+  const { text, setText } = props
   const [showModal, setShowModal] = useState(false)
   return (
     <>
