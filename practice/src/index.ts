@@ -38,3 +38,11 @@ const obj2: BarObject = {
 }
 
 console.log(obj2)
+
+const num = 1
+console.log(111)
+console.log(num)
+
+function foobar(num2) {
+  console.log(num2)
+}
