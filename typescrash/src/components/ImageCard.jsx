@@ -1,35 +1,37 @@
-import React from 'react'
+import React from 'react';
+import ImageModal from './ImageModal';
 
-class ImageCard extends React.Component {
-  constructor(props) {
-    super(props);
+const ImageCard = (props) => {
+  const [modalShow, setModalShow] = React.useState(false);
+  const [spans, setSpans] = React.useState(0);
+  const imageRef = React.useRef(null);
 
-    this.state = { spans: 0 }
+  const calculateSpans = () => {
+    const height = imageRef.current.clientHeight;
+    setSpans(Math.ceil(height / 10));
+  };
 
-    this.imageRef = React.createRef();
-  }
+  React.useEffect(() => {
+    imageRef.current.addEventListener('load', calculateSpans);
+  });
 
-  componentDidMount() {
-    this.imageRef.current.addEventListener('load', this.setSpans);
-  }
+  const { description, urls } = props.image;
 
-  setSpans = () => {
-    const height = this.imageRef.current.clientHeight;
-
-    const spans = Math.ceil(height / 10);
-
-    this.setState({ spans });
-  }
-
-  render() {
-    const { description, urls } = this.props.image;
-
-    return (
-      <div style={{ gridRowEnd: `span ${this.state.spans}` }}>
-        <img ref={this.imageRef}  alt={description} src={urls.regular} />
+  return (
+    <>
+      <div style={{ gridRowEnd: `span ${spans}`}}>
+        <img className="ImageCard" onClick={() => setModalShow(true)} ref={imageRef} alt={description} src={urls.regular} />
       </div>
-    )
-  }
+      
+      <ImageModal
+        image={props.image}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        size={"lg"}
+      />
+    </>
+  )
+
 }
 
 export default ImageCard;
